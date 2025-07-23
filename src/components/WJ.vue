@@ -3,7 +3,7 @@
   <div class="main">
     <h3>{{ title }}</h3>
     <van-form @submit="getPatient">
-      <van-cell-group inset  :v-show="isLoginVisiable">
+      <van-cell-group inset>
         <van-field
           class="insert"
           v-model="pnum"
@@ -72,13 +72,10 @@
         :key="group.TmGroupId"
         class="question-group"
       >
-        <template >
+        <template v-if="group.SySex !== '2' && patient.Sex === '男'">
           <!-- 一级标题 -->
-            <!-- v-if="group.Sjid === '-1'" -->
-              <!-- v-if="group.SySex !== '2' && patient.Sex === '男'" -->
           <van-cell
-           
-            v-if="group.SySex===Psex||group.SySex==='3'||group.SySex===''"
+            v-if="group.Sjid === '-1'"
             :title="group.TmGroupName"
             class="group-title"
           />
@@ -197,7 +194,6 @@
             </div>
           </div>
         </template>
-       
       </div>
 
       <!-- 提交按钮 -->
@@ -223,6 +219,7 @@
         >
           重置
         </van-button>
+
       </div>
     </van-form>
   </div>
@@ -237,6 +234,7 @@
 import { Html5Qrcode } from "html5-qrcode";
 
   const pnum = ref("");
+    // eslint-disable-next-line no-unused-vars
     const Psex = ref("");
   const button_visiable = ref(true);
   const isreadonly = ref(false);
@@ -244,6 +242,7 @@ import { Html5Qrcode } from "html5-qrcode";
   const patient = reactive({});
   const WjTmGroup = ref([]);
   const submit_permitted = ref(false);
+  // eslint-disable-next-line no-unused-vars
   const isLoginVisiable=ref(true);
 
   // 返回按钮点击处理
